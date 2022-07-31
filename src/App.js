@@ -4,16 +4,17 @@ import Sidebar from './components/sidebar/Sidebar';
 import HomeScreen from './screens/homeScreen/HomeScreen';
 import { Container } from 'react-bootstrap'
 import "./_app.scss"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LoginScreen from './screens/loginScreen/LoginScreen';
 import {
-  BrowserRouter,
   Routes,
   Route,
-  Navigate
+  Navigate,
+  useNavigate
 } from "react-router-dom";
-
+import { useSelector } from 'react-redux';
 const Layout = ({ children }) => {
+
   const [sidebar, setSidebar] = useState(false);
 
   const handleToggleSidebar = () => setSidebar(value => !value);
@@ -29,28 +30,36 @@ const Layout = ({ children }) => {
     </>
   )
 }
+
+
 const App = () => {
+  const navigate = useNavigate();
+  const { accessToken, loading } = useSelector(state => state.auth)
+  useEffect(() => {
+    if (!loading && !accessToken) {
+      navigate('/auth')
+    }
+  }, [accessToken, loading, navigate])
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={
-          <Layout>
-            <HomeScreen />
-          </Layout>}
-          exact
-        />
-        <Route path="/auth" element={<LoginScreen />} />
-        <Route path="/search" element={
-          <Layout>
-            {<h1>Search Results</h1>}
-          </Layout>}
-        />
-        <Route
-          path="*"
-          element={<Navigate to="/" replace />}
-        />
-      </Routes>
-    </BrowserRouter >
+    <Routes>
+      <Route path="/" element={
+        <Layout>
+          <HomeScreen />
+        </Layout>}
+        exact
+      />
+      <Route path="/auth" element={<LoginScreen />} />
+      <Route path="/search" element={
+        <Layout>
+          {<h1>Search Results</h1>}
+        </Layout>}
+      />
+      <Route
+        path="*"
+        element={<Navigate to="/" replace />}
+      />
+    </Routes>
   );
 }
 
