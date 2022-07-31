@@ -10,6 +10,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
+  Navigate
 } from "react-router-dom";
 
 const Layout = ({ children }) => {
@@ -43,6 +44,10 @@ const App = () => {
           <Layout>
             {<h1>Search Results</h1>}
           </Layout>}
+        />
+        <Route
+          path="*"
+          element={<Navigate to="/" replace />}
         />
       </Routes>
     </BrowserRouter >
