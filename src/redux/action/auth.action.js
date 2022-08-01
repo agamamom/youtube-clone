@@ -8,7 +8,7 @@ const login = () => async dispatch => {
             type: LOGIN_REQUEST,
         })
         const provider = new firebase.auth.GoogleAuthProvider()
-        provider.addScope('https://www.googleapis.com/auth/youtube.force-ssl')
+        provider.addScope("https://www.googleapis.com/auth/youtube.force-ssl")
 
         const res = await auth.signInWithPopup(provider)
         const accessToken = res.credential.accessToken
