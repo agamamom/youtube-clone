@@ -13,6 +13,7 @@ import {
   useNavigate
 } from "react-router-dom";
 import { useSelector } from 'react-redux';
+import WatchScreen from './screens/watchScreen/WatchScreen';
 const Layout = ({ children }) => {
 
   const [sidebar, setSidebar] = useState(false);
@@ -55,6 +56,13 @@ const App = () => {
           {<h1>Search Results</h1>}
         </Layout>}
       />
+      <Route path="/watch/:id" element={
+        <Layout>
+          <WatchScreen />
+        </Layout>}
+      />
+
+      {/* Code ở dưới dùng để chuyển về trang chủ khi đường link sai cú pháp */}
       <Route
         path="*"
         element={<Navigate to="/" replace />}
