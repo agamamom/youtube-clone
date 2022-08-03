@@ -4,7 +4,10 @@ import moment from 'moment'
 import numeral from 'numeral'
 import { MdThumbUp, MdThumbDown } from 'react-icons/md'
 import ShowMoreText from "react-show-more-text";
-const VideoMetaData = () => {
+const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
+    const { channelId, channelTitle, description, title, publishedAt } = snippet;
+    const { viewCount, likeCount, dislikeCount } = statistics;
+
     return (
         <div className="videoMetaData py-2">
             <div className="videoMetaData__top">
