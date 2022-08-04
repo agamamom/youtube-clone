@@ -1,32 +1,53 @@
-import React from 'react'
-import Comment from '../commet/Comment'
+import React, { useEffect, useState } from 'react'
 import './_comments.scss'
-const Comments = () => {
-    const handleComment = () => {
+import { useDispatch, useSelector } from 'react-redux';
+import { addComment, getCommentsOfVideoById } from '../../redux/action/comments.action';
+import Comment from '../commet/Comment';
+const Comments = ({ videoId, totalComments }) => {
 
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getCommentsOfVideoById(videoId))
+    }, [videoId, dispatch])
+
+    const comments = useSelector(state => state.commentList.comments)
+
+    const { photoURL } = useSelector(state => state.auth?.user)
+
+    const [text, setText] = useState('')
+    const _comments = comments?.map(
+        comment => comment.snippet.topLevelComment.snippet
+    )
+
+    const handleComment = e => {
+        e.preventDefault()
+        if (text.length === 0) return
+
+        dispatch(addComment(videoId, text))
+
+        setText('')
     }
     return (
         <div className='comments'>
-            <p>1234 comments</p>
-            <div className="comments__form d-flex w-100 my-2">
-                <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt=""
-                    className='rounder-circle mr-3'
-                />
-                <form onSubmit={handleComment()} className="d-flex flex-grow-1">
+            <p>{totalComments} Comments</p>
+            <div className='my-2 comments__form d-flex w-100'>
+                <img src={photoURL} alt='avatar' className='me-3 rounded-circle' />
+                <form onSubmit={handleComment} className='d-flex flex-grow-1'>
                     <input
-                        type="text"
+                        type='text'
                         className='flex-grow-1'
                         placeholder='Write a comment...'
+                        value={text}
+                        onChange={e => setText(e.target.value)}
                     />
-                    <button className='border-0 p-2'>Comment</button>
+                    <button className='p-2 border-0'>Comment</button>
                 </form>
             </div>
-            <div className="comments__list">
-                {
-                    [...Array(15)].map(() => (
-                        <Comment />
-                    ))
-                }
+            <div className='comments__list'>
+                {_comments?.map((comment, i) => (
+                    <Comment comment={comment} key={i} />
+                ))}
             </div>
         </div>
     )

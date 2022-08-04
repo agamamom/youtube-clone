@@ -1,4 +1,4 @@
-@import '../../base';
+@import '../../_base.scss';
 
 .videoMetaData {
     &__top {
@@ -23,6 +23,10 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
 
+            &.btn-gray {
+                background-color: gray;
+            }
+
             &:hover {
                 color: #fff;
             }
@@ -45,6 +49,14 @@
             margin: 1rem 0;
             color: #fff;
             font-weight: 500;
+        }
+    }
+}
+
+@media (max-width: $breakpoint-small) {
+    .videoMetaData {
+        h5 {
+            font-size: 1.1rem;
         }
     }
 }

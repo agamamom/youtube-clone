@@ -27,7 +27,7 @@ export const homeVideosReducer = (
             return {
                 ...state,
                 loading: false,
-                error: payload
+                error: payload,
             }
         case HOME_VIDEOS_REQUEST:
             return {
@@ -53,14 +53,14 @@ export const selectedVideoReducer = (
                 ...state,
                 loading: true,
             }
-            break;
+
         case SELECTED_VIDEO_SUCCESS:
             return {
                 ...state,
                 video: payload,
-                loading: true,
+                loading: false,
             }
-            break;
+
         case SELECTED_VIDEO_FAIL:
             return {
                 ...state,
@@ -68,7 +68,7 @@ export const selectedVideoReducer = (
                 loading: false,
                 error: payload
             }
-            break;
+
 
         default:
             return state

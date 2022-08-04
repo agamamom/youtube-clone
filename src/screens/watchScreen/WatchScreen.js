@@ -14,6 +14,10 @@ const WatchScreen = () => {
         dispatch(getVideoById(id))
     }, [dispatch, id])
 
+    // const { videos, loading: relatedVideosLoading } = useSelector(
+    //     state => state.relatedVideos
+    // )
+
     const { video, loading } = useSelector(state => state.selectedVideo)
 
     return (
@@ -35,8 +39,10 @@ const WatchScreen = () => {
                         <h6>Loading...</h6>
                     )
                 }
-                <VideoMetaData />
-                <Comments />
+                <Comments
+                    videoId={id}
+                    totalComments={video?.statistics?.commentCount}
+                />
             </Col>
             <Col lg={4}>
                 {[...Array(10)].map(() => (
