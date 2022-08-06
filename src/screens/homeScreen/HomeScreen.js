@@ -28,25 +28,23 @@ const HomeScreen = () => {
                 dataLength={videos.length}
                 next={fetchData}
                 hasMore={true}
-                Loader={
+                loader={
                     <div className='spinner-border text-danger d-block mx-auto'>
-
                     </div>
                 }
                 className='row'
             >
-                {
-                    !loading ? videos.map((video) => (
+                {!loading
+                    ? videos.map(video => (
                         <Col lg={3} md={4}>
                             <Video video={video} key={video.id} />
                         </Col>
-                    )) :
-                        [...Array(20)].map(() => (
-                            <Col lg={3} md={4}>
-                                <SkeletonVideo />
-                            </Col>
-                        ))
-                }
+                    ))
+                    : [...Array(20)].map(() => (
+                        <Col lg={3} md={4}>
+                            <SkeletonVideo />
+                        </Col>
+                    ))}
             </InfiniteScroll>
         </Container>
     )

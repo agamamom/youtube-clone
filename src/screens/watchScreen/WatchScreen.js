@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './WatchScreen.scss'
 import { Row, Col } from 'react-bootstrap'
 import VideoMetaData from '../../components/videoMetaData/VideoMetaData'
-import VideoHorizontal from '../../components/videoHorizontal.js/VideoHorizontal'
+import VideoHorizontal from '../../components/videoHorizontal/VideoHorizontal'
 import Comments from '../../components/comments/Comments'
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'

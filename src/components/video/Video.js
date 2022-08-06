@@ -5,9 +5,8 @@ import request from '../../api'
 import moment from 'moment'
 import numeral from 'numeral'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-import {
-    useNavigate
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 const Video = ({ video }) => {
     const {
         snippet: {
@@ -17,7 +16,6 @@ const Video = ({ video }) => {
             publishedAt,
             thumbnails: { medium },
         },
-        contentDetails,
     } = video
     const id = video.id
 
@@ -32,9 +30,9 @@ const Video = ({ video }) => {
 
     useEffect(() => {
         const get_video_details = async () => {
-            const { data: { items } } = await request('/videos', {
+            const { data: { items }, } = await request('/videos', {
                 params: {
-                    part: 'contentDetails, statistics',
+                    part: 'statistics, contentDetailss',
                     id: _videoId,
                 },
             })
@@ -78,7 +76,6 @@ const Video = ({ video }) => {
                 <span>{moment(publishedAt).fromNow()}</span>
             </div>
             <div className="video__channel">
-                {/* <img src={channelIcon?.url} alt="" /> */}
                 <LazyLoadImage src={channelIcon?.url} effect="blur" />
                 <p>{channelTitle}</p>
             </div>
