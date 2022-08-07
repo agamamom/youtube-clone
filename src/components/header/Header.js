@@ -15,7 +15,7 @@ const Header = ({ handleToggleSidebar }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        navigate(`search/${input}`)
+        navigate(`/search/${input}`)
     }
     return (
         <div className='header'>

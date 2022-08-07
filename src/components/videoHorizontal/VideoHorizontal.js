@@ -22,6 +22,7 @@ const VideoHorizontal = ({ video, searchScreen, subScreen }) => {
             thumbnails: { medium },
             resourceId,
         },
+
     } = video
 
     const isVideo = !(id.kind === 'youtube#channel' || subScreen)
@@ -71,7 +72,7 @@ const VideoHorizontal = ({ video, searchScreen, subScreen }) => {
     const HandleClick = () => {
         isVideo
             ? navigate(`/watch/${id.videoId}`)
-            : navigate(`/channel/${id.channelId}`)
+            : navigate(`/channel/${_channelId}`)
     }
 
     const thumbnail = !isVideo && 'videoHorizontal__thumbnail-channel'

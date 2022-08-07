@@ -15,9 +15,10 @@ export const getChannelDetails = id => async dispatch => {
         const { data } = await request('/channels', {
             params: {
                 part: 'snippet,statistics,contentDetails',
-                id,
+                id: id,
             },
         })
+        console.log(data)
         dispatch({
             type: CHANNEL_DETAILS_SUCCESS,
             payload: data.items[0],
